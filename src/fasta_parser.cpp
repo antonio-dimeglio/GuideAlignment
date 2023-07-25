@@ -4,8 +4,8 @@ FastaParser::FastaParser(std::string filePath){
     this->filePath = filePath;
 }
 
-std::vector<FastaEntry> FastaParser::parseFile(){
-    std::vector<FastaEntry> sequences;
+std::vector<FastaSequence> FastaParser::parseFile(){
+    std::vector<FastaSequence> sequences;
     fs::ifstream fileHandler(this->filePath);
     std::string line;
     std::string header; 
@@ -19,7 +19,7 @@ std::vector<FastaEntry> FastaParser::parseFile(){
                 continue;
             case '>':
                 if (!header.empty()){
-                    sequences.push_back(FastaEntry(header, sequence));
+                    sequences.push_back(FastaSequence(header, sequence));
                     sequence.clear();
                 }
 
@@ -32,7 +32,7 @@ std::vector<FastaEntry> FastaParser::parseFile(){
     }
 
     if (!sequence.empty()){
-        sequences.push_back(FastaEntry(header, sequence));
+        sequences.push_back(FastaSequence(header, sequence));
     }
 
     return sequences;

@@ -10,13 +10,13 @@ project(
 
 set(SOURCES
     src/main.cpp
-    src/fasta_entry.cpp
+    src/fasta_sequence.cpp
     src/fasta_parser.cpp
     src/align_algorithms.cpp
 )
 
 set(HEADERS
-    include/fasta_entry.hpp
+    include/fasta_sequence.hpp
     include/fasta_parser.hpp
     include/sub_matrix.hpp
     include/align_algorithms.hpp

@@ -1,8 +1,10 @@
 #include <iostream>
 #include <boost/program_options.hpp>
 #include <boost/filesystem.hpp>
-#include "../include/fasta_entry.hpp"
+#include "../include/fasta_sequence.hpp"
 #include "../include/fasta_parser.hpp"
+#include "../include/align_algorithms.hpp"
+#include "../include/sub_matrix.hpp"
 
 namespace po = boost::program_options;
 namespace fs = boost::filesystem;
@@ -45,7 +47,16 @@ int main(int argc, char* argv[]){
     FastaParser fp(inputFile);
     auto sequences = fp.parseFile();
 
+    FastaSequence first = sequences.at(0);
+    FastaSequence second = sequences.at(1);
 
+    auto result = pairwiseLocalAlignment(first, second, Nucleotide, -2);
+
+    std::cout << 
+        result.first.header << '\n' <<
+        result.first.sequence << '\n' << 
+        result.second.header << '\n' << 
+        result.second.sequence << '\n';
 
     return 0;
 }

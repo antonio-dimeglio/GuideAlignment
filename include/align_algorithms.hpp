@@ -1,13 +1,30 @@
 #pragma once 
 
-#include "fasta_entry.hpp"
-#include "string"
+#include "fasta_sequence.hpp"
+#include <string>
+#include "sub_matrix.hpp"
+#include "boost/multi_array.hpp"
+#include <algorithm>
 
-struct PairwiseOutput{
-    std::string first;
-    std::string second; 
-    long int score;
+struct PairwiseAlignmentOutput{
+    FastaSequence first;
+    FastaSequence second;
+
+    PairwiseAlignmentOutput() = default;
+
+    PairwiseAlignmentOutput(FastaSequence first, FastaSequence second);
 };
 
-PairwiseOutput pairwise_local_alignment(FastaEntry firstSequence, FastaEntry secondSequence);
+int** pairwiseLocalAlignmentMatrix(
+    FastaSequence first, 
+    FastaSequence second, 
+    SubstitutionMatrix sm,
+    int indelPenalty
+);
 
+PairwiseAlignmentOutput pairwiseLocalAlignment(
+    FastaSequence first,
+    FastaSequence second,
+    SubstitutionMatrix sm,
+    int indelPenalty
+);

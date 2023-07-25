@@ -2,16 +2,17 @@
 
 #include <string>
 #include <vector>
-#include "fasta_entry.hpp"
+#include "fasta_sequence.hpp"
 #include <boost/filesystem/fstream.hpp>
 #include <boost/algorithm/string.hpp>
 
 namespace fs = boost::filesystem;
 
-class FastaParser{
-    public:
-        std::string filePath;
+struct FastaParser{
+    std::string filePath;
 
-        FastaParser(std::string filePath);
-        std::vector<FastaEntry> parseFile();
+    FastaParser() = default;
+
+    FastaParser(std::string filePath);
+    std::vector<FastaSequence> parseFile();
 };
